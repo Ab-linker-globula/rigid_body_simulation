@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+import os
+import time
+
+
+
+path = os.path.abspath(os.path.dirname(__file__))
+
+###get parameters in config.txt
+
+path_to_config = os.path.join(os.path.dirname(__file__),'config.txt')
+f = open(path_to_config, 'r')
+data = f.read()
+first_line = data.split('\n', 1)[0]
+second_line = data.split('\n', 2)[1]
+third_line = data.split('\n', 3)[2]
+fourth_line = data.split('\n', 4)[3]
+fifth_line = data.split('\n', 5)[4]
+sixth_line = data.split('\n', 6)[5]
+seventh_line = data.split('\n', 7)[6]
+
+repeat = int(first_line.rsplit('=', 1)[1])
+start_len_of_linker =  int(second_line.rsplit('=', 1)[1])
+end_len_of_linker =  int(third_line.rsplit('=', 1)[1])
+start_layers =  int(fourth_line.rsplit('=', 1)[1])
+end_layers =  int(fifth_line.rsplit('=', 1)[1])
+diameter =  int(sixth_line.rsplit('=', 1)[1])
+path_to_blender = seventh_line.rsplit('=', 1)[1]
+f.close()
+
+
+####print parameters in files
+
+path_to_file_with_result = os.path.join(os.path.dirname(__file__),'result.txt')
+len_linker_path_to_file= os.path.join(os.path.dirname(__file__),'data/len_linker.txt') 
+layer_path_to_file= os.path.join(os.path.dirname(__file__),'data/layer.txt')
+path_to_blendfile= os.path.join(os.path.dirname(__file__),'data/start.blend') 
+
+#path_to_scriptforblender = os.path.join(os.path.dirname(__file__),'/home/r/2JMB_test/Rigid_body_simulation_test/data/code_for_blender_279.py')     
+path_to_scriptforblender = os.path.join(os.path.dirname(__file__),'data/code_for_blender_279.py')
+path_to_output_file = os.path.join(os.path.dirname(__file__),'data/blend.txt')
+
+
+
+###test
+f2 = open( path_to_file_with_result, 'a+')
+from time import gmtime, strftime
+f2.write(strftime(" %Y-%m-%d %H:%M:%S", gmtime()))
+f2.close() 
+####test 
+
+
+#################____________linker_____________###############
+linker= start_len_of_linker -1
+linker_dif = end_len_of_linker - start_len_of_linker + 1
+for lin in range(linker_dif):
+    linker += 1
+    a=str(linker)
+    
+    f1=open(len_linker_path_to_file, 'w')
+    f1.write(a)
+    f1.close()
+
+    dif_layers = end_layers - start_layers + 1       
+    layer = start_layers-1 
+    for number in range(dif_layers):
+
+##############__________layer_______________######################      
+      layer += 1
+      la = str(layer)
+      f2=open(layer_path_to_file, 'w')
+      f2.write(la)
+      f2.close() 
+      
+###############______________blend.txt__________###############
+      f = open( path_to_output_file, 'w')
+      f.write('')
+      f.close()
+
+#      path_popen = str(path_to_blender + path_to_blendfile + " --python  " + path_to_scriptforblender)    
+      path_popen = str("blender " + path_to_blendfile + " --python  " + path_to_scriptforblender)
+      p = subprocess.Popen(path_popen, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) 
+
+      for line in p.stdout.readlines():
+          print line,
+      retval = p.wait() 
+
+      
+      
+      letters = 0 
+       
+      f= open(path_to_output_file, 'r')
+      for line in f: 
+        letters = len(line)    
+      if letters == 0: 
+            f.close()  
+            break       
+      else:        
+            f2 = open( path_to_file_with_result, 'a+')
+            f2.write('\n')
+            f2.write('\n')
+            f2.write('number of monomers = ')
+            f2.write(str(layer))
+            f2.write('\n')    
+            f2.write('number of spheres in the linker (lenght of linker) = ')
+            f2.write(str(linker))  
+            f2.write('\n')  
+            f2.write('number of successful runs out of  ')
+            f2.write(str(repeat))     
+            f2.write(' = ')
+            f2.write(str(letters)) 
+###test
+            from time import gmtime, strftime
+            f2.write(strftime(" %Y-%m-%d %H:%M:%S", gmtime())) 
+####test          
+            f2.close()
+            f.close()
+       
+
+      path_to = 'gedit '+path_to_file_with_result
+      p = subprocess.Popen(path_to, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+   
+
+

@@ -1,0 +1,35 @@
+1. number_of_runs = 100
+2. min_number_of_spheres_in_the_linker (lenght of linker) = 1
+3. max_number_of_spheres_in_the_linker = 7
+4. min_number_of_monomers = 2
+5. max_number_of_monomers = 100
+6. diameter(A) of big spheres (globular domain) = 30
+7. path_to_Blender = /home/r/video/blender-2.79-linux-glibc219-x86_64/blender 
+8. steps_per_second = 60
+ 
+
+
+##############################################################################################
+
+1. number_of_runs - number of simulation with protein structure included n-number of monomers and tn-number of spheres in linker. If you want to give more accuratly data you may set this value ( with high values you may to give more data but result will be slower ). Default value for number_of_runs is 100.
+
+2. min_nimber_of_spheres_in_the_linker (lenght of linker) - in this line you may set start lenght of linker. Number of spheres (amino acid residues) will be grow to max lenght (max_number_of_spheres_in_the_linker).
+
+3. max_number_of_spheres_in_the_linker -  on this value "start" script stop simulation and close Blender. Default value for max_number_of_spheres_in_the_linker is 7. 
+
+4. min_number_of_monomers -  rigid body simulation start with protein structure included this number of monomers.Step by step the structure grew to max_number_of_monomers. Default value for min_number_of_monomers is 2 . Attention! If you set value of min_number_of_monomers equal to  50 or more then simulation will take  15-20 min or more. At this time you will see only grey screen of Blender. This is normally. After simulation ended you will see result in result.txt. 
+
+5. max_number_of_monomers - on this value "start" script stop simulation and close Blender. Default value for max_number_of_monomers is 100.  
+
+6. diameter(A) of big spheres (globular domain) . Default value is 30. Recomended max value for this diameter is 150A.  
+
+7. path_to_Blender  -  in this line you may to add a full path to executable file of Blender
+
+8. Number of simulation steps taken per second (higher values are more accurate but slower). Default value for steps_per_second is 60. Max value = 1000. Recomended max value for steps_per_second is 120. 
+
+
+
+
+
+
+ 
