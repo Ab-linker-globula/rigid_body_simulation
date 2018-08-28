@@ -76,6 +76,16 @@ x_path_steps_sec =first_line.rsplit('=', 1)[1]
 steps_per_second = int(x_path_steps_sec) 
 f.close()
 
+################__________diameter___________##################
+path_diameter = os.path.join(os.path.split(path)[0],'config.txt')
+f = open( path_diameter , 'r')
+data = f.read()
+first_line = data.split('\n', 8)[7]
+part_diameter =first_line.rsplit('=', 1)[1]
+diameter = int(part_diameter) 
+f.close()
+R= diameter/2
+
 ########__value__constraint_generic_____############
 limit_angle = False
 limit_lin = True
@@ -125,8 +135,8 @@ for index in range(repeat):
        bpy.context.object.constraints['Limit Distance'].target = bpy.data.objects['Sphere.'+str_rep.rjust(3,'0')] 
     
 #add_GLOBULAR_DOMAIN
-  location_x = loc_sphere_x+ 16.75
-  bpy.ops.mesh.primitive_uv_sphere_add(segments=32, ring_count=16, size=15.0,   location=(location_x, 0.0, 0.0))
+  location_x = loc_sphere_x+ 1.75 + R
+  bpy.ops.mesh.primitive_uv_sphere_add(segments=32, ring_count=16, size= R,   location=(location_x, 0.0, 0.0))
 ########################################
   tar = rep+1
   str_tar = str(tar) 
