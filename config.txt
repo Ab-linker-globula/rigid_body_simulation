@@ -3,7 +3,7 @@
 3. max_number_of_spheres_in_the_linker = 7
 4. min_number_of_monomers = 2
 5. max_number_of_monomers = 100
-6. diameter(A) of big spheres (globular domain) = 30
+6. diameter(A) of big spheres (globular domain) = 40
 7. path_to_Blender = /home/r/video/blender-2.79-linux-glibc219-x86_64/blender 
 8. steps_per_second = 60
  
