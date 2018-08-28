@@ -102,7 +102,7 @@ for lin in range(linker_dif):
             f2 = open( path_to_file_with_result, 'a+')
             f2.write('\n')
             f2.write('\n')
-            f2.write('number of subunitsin the olygomeric complexes = ')
+            f2.write('number of subunits in the olygomeric complexes = ')
             f2.write(str(layer))
             f2.write('\n')    
             f2.write('number of residues in the linker (lenght of linker) = ')
